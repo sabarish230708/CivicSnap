@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CivicSnap - TN Citizen Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="gov-header">
+        <div class="header-content">
+            <div class="logo-container">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="emblem-icon">
+                    <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                    <path d="M2 17l10 5 10-5"></path>
+                    <path d="M2 12l10 5 10-5"></path>
+                </svg>
+                <div class="header-titles">
+                    <h1>CivicSnap</h1>
+                    <p>Official Municipal Reporting Portal</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="main-nav">
+        <ul>
+            <li><button class="nav-btn active" id="btn-home" onclick="navigateTo('home')">Main Menu</button></li>
+            <li><button class="nav-btn" id="btn-create" onclick="navigateTo('create')">Create Query</button></li>
+            <li><button class="nav-btn" id="btn-pending" onclick="navigateTo('pending')">View Pending Queries</button></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <!-- Main Menu View -->
+        <section id="view-home" class="view active">
+            <div class="hero">
+                <h2>Welcome to CivicSnap</h2>
+                <p>Report municipal issues directly to the respective departments. Use your camera to capture problems like potholes or stagnant water.</p>
+                <div class="quick-actions">
+                    <button class="primary-btn" onclick="navigateTo('create')">Report an Issue Now</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Create Query View -->
+        <section id="view-create" class="view">
+            <h2>Create New Query</h2>
+            <div class="card">
+                <div class="camera-section">
+                    <video id="camera-feed" autoplay playsinline></video>
+                    <canvas id="photo-canvas" style="display:none;"></canvas>
+                    <img id="photo-preview" style="display:none;" />
+                    
+                    <div class="camera-controls">
+                        <button class="secondary-btn" id="start-camera-btn">Start Camera</button>
+                        <button class="primary-btn" id="take-photo-btn" style="display:none;">Capture Issue</button>
+                        <button class="secondary-btn" id="retake-photo-btn" style="display:none;">Retake Photo</button>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <div class="location-box">
+                        <button class="secondary-btn" id="get-location-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            Add Location Tag
+                        </button>
+                        <p id="location-text">Location: Not added</p>
+                    </div>
+                    
+                    <button class="primary-btn submit-btn" id="submit-query-btn" disabled>Submit to AI for Categorization</button>
+                    
+                    <div id="ai-processing" class="processing-status" style="display:none;">
+                        <div class="spinner"></div>
+                        <p>AI is analyzing the image and categorizing the issue...</p>
+                    </div>
+
+                    <div id="ai-result" class="result-box" style="display:none;">
+                        <h3>Complaint Successfully Routed</h3>
+                        <p><strong>Identified Issue:</strong> <span id="res-issue"></span></p>
+                        <p><strong>Department:</strong> <span id="res-dept"></span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- View Pending Queries View -->
+        <section id="view-pending" class="view">
+            <h2>Pending Queries</h2>
+            <div id="queries-list" class="queries-grid">
+                <!-- Queries injected here via JS -->
+                <p class="empty-state">No pending queries found.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- AI Integration Setup -->
+    <script type="module" src="app.js"></script>
+</body>
+</html>
