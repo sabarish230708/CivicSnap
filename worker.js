@@ -33,7 +33,7 @@ export default {
       return jsonResponse({ error: "Missing 'image' (base64) in request body" }, 400);
     }
 
-    const GEMINI_MODEL = "gemini-1.5-flash"; // keep consistency with the frontend prompt
+    const GEMINI_MODEL = "gemini-3.6-flash"; // keep consistency with the frontend prompt
     const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${env.GEMINI_API_KEY}`;
 
     const prompt = `You are a municipal AI categorization assistant. 
